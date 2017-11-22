@@ -1,8 +1,9 @@
-package gui;
+package labo8_calculatrice.gui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import labo8_calculatrice.*; // to check
 
 public class JCalculator extends JFrame
 {
