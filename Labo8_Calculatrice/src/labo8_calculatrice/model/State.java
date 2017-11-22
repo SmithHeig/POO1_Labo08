@@ -12,6 +12,6 @@ import labo8_calculatrice.util.*;
  * @author dname
  */
 public class State {
-    Pile valeurs = new Pile();
+    private Pile valeurs = new Pile();
     double currentNumber; 
 }

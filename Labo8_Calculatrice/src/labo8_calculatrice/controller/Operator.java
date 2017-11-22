@@ -13,7 +13,7 @@ import labo8_calculatrice.model.State;
  * @author James
  */
 public abstract class Operator {
-    State state;
+    private State state;
     
     public Operator(State state){
         this.state = state;
