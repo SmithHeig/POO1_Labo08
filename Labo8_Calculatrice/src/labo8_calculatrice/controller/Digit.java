@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Digit {
-    
+public class Digit extends Operator{
+    public Digit (State state){
+        super(state);
+    }
 }

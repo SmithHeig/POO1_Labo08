@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Dot {
-    
+public class Dot extends Operator{
+    public Dot(State state){
+        super(state);
+    }
 }

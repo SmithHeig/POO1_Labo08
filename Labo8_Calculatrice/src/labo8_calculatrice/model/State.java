@@ -5,10 +5,13 @@
  */
 package labo8_calculatrice.model;
 
+import labo8_calculatrice.util.*;
+
 /**
  *
  * @author dname
  */
 public class State {
-    
+    Pile valeurs = new Pile();
+    double currentNumber; 
 }

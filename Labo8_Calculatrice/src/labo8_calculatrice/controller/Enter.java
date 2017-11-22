@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Enter {
-    
+public class Enter extends Operator{
+    public Enter(State state){
+        super(state);
+    }
 }

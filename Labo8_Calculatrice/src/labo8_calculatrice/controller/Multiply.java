@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Multiply {
-    
+public class Multiply extends Operator{
+    public Multiply (State state){
+        super(state);
+    }
 }

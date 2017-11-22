@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Sign {
-    
+public class Sign extends Operator{
+    public Sign(State state){
+        super(state);
+    }
 }

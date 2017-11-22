@@ -5,10 +5,15 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Backspace {
+public class Backspace extends Operator {
+    public Backspace(State state){
+        super(state);
+    }
     
 }

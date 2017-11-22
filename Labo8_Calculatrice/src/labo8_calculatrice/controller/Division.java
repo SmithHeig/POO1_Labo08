@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public interface Division {
-    
+public class Division extends Operator{
+    public Division (State state){
+        super(state);
+    }
 }

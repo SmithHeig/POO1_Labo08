@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class ClearError {
-    
+public class ClearError extends Operator{
+    public ClearError(State state){
+        super(state);
+    }
 }

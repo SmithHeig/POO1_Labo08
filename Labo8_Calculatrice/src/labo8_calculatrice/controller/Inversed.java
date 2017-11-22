@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Inversed {
-    
+public class Inversed extends Operator{
+    public Inversed(State state){
+        super(state);
+    }
 }

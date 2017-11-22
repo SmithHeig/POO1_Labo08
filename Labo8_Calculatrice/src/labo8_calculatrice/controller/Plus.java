@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Plus {
-    
+public class Plus extends Operator{
+    public Plus (State state){
+        super(state);
+    }
 }

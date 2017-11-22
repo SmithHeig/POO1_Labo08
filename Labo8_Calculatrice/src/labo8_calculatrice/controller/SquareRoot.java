@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class SquareRoot {
-    
+public class SquareRoot extends Operator{
+    public SquareRoot(State state){
+        super(state);
+    }
 }

@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class MemoryRecall {
-    
+public class MemoryRecall extends Operator{
+    public MemoryRecall(State state){
+        super(state);
+    }
 }

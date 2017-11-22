@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Square {
-    
+public class Square extends Operator{
+    public Square(State state){
+        super(state);
+    }
 }

@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class MemoryStore {
-    
+public class MemoryStore extends Operator{
+    public MemoryStore(State state){
+        super(state);
+    }
 }

@@ -5,10 +5,14 @@
  */
 package labo8_calculatrice.controller;
 
+import labo8_calculatrice.model.State;
+
 /**
  *
  * @author James
  */
-public class Clear {
-    
+public class Clear extends Operator{
+    public Clear(State state){
+        super(state);
+    }
 }
