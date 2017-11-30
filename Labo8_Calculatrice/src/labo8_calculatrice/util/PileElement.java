@@ -1,4 +1,4 @@
-package util;
+package labo8_calculatrice.util;
 
 /**
  * Classe Représente un élément de la Pile. Contient un Objet

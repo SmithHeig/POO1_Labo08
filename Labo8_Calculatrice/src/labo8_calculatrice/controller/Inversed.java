@@ -14,5 +14,19 @@ import labo8_calculatrice.model.State;
 public class Inversed extends Operator{
     public Inversed(State state){
         super(state);
+    }    public void execute(){
+        
+        state.empile();
+        
+        if(state.stackSize() > 0){
+            double denominateur = state.desempile();
+            if(denominateur == 0){
+                state.flagError();
+                state.empile(denominateur);
+            }
+            else {
+                state.setCurrentValue(1 / denominateur);
+            }
+        }
     }
 }

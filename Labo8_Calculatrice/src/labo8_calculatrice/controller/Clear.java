@@ -14,5 +14,9 @@ import labo8_calculatrice.model.State;
 public class Clear extends Operator{
     public Clear(State state){
         super(state);
+    }   
+    
+    public void execute(){
+        state.C();
     }
 }

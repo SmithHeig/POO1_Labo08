@@ -13,12 +13,16 @@ import labo8_calculatrice.model.State;
  * @author James
  */
 public abstract class Operator {
-    private State state;
+    protected State state;
     
     public Operator(State state){
         this.state = state;
     }
     
-    public void execute(){};
+    public void execute(){
+        
+        double denominateur = state.desempile();
+            
+    };
     
 }

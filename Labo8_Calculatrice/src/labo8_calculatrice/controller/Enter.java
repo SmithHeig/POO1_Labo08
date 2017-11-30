@@ -15,4 +15,9 @@ public class Enter extends Operator{
     public Enter(State state){
         super(state);
     }
+    
+    
+    public void execute() {
+        state.empile();
+    }
 }

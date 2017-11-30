@@ -15,4 +15,16 @@ public class Minus extends Operator{
     public Minus (State state){
         super(state);
     }
+    
+    
+    public void execute() {
+        state.empile();
+        
+        if(state.stackSize() > 1){
+            double B = state.desempile();
+            double A = state.desempile();
+            
+            state.setCurrentValue(A - B);
+        }
+    }
 }

@@ -15,4 +15,7 @@ public class MemoryRecall extends Operator{
     public MemoryRecall(State state){
         super(state);
     }
+    public void execute() {
+        state.memoryLoad();
+    }
 }

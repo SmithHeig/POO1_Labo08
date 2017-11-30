@@ -14,5 +14,9 @@ import labo8_calculatrice.model.State;
 public class ClearError extends Operator{
     public ClearError(State state){
         super(state);
+    }   
+    
+    public void execute(){
+        state.CE();
     }
 }

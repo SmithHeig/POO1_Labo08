@@ -12,7 +12,14 @@ import labo8_calculatrice.model.State;
  * @author James
  */
 public class Digit extends Operator{
-    public Digit (State state){
+    
+    char digit;
+    public Digit (State state, int d){
         super(state);
+        digit = (char)(d + '0');
+    }   
+    
+    public void execute() {
+        state.addDigit(digit);
     }
 }

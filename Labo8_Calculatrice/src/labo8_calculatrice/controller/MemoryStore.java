@@ -15,4 +15,7 @@ public class MemoryStore extends Operator{
     public MemoryStore(State state){
         super(state);
     }
+    public void execute() {
+        state.memorySave();
+    }
 }

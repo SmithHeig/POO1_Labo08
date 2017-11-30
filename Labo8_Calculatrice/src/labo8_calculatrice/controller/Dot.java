@@ -15,4 +15,9 @@ public class Dot extends Operator{
     public Dot(State state){
         super(state);
     }
+    
+    
+    public void execute(){
+        state.addDot();
+    }
 }

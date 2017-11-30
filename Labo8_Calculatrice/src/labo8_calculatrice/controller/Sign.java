@@ -14,5 +14,10 @@ import labo8_calculatrice.model.State;
 public class Sign extends Operator{
     public Sign(State state){
         super(state);
+    }    
+    
+    public void execute(){
+        
+        state.negateCurrentValue();
     }
 }

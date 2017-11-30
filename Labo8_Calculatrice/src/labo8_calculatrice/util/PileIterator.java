@@ -1,4 +1,4 @@
-package util;
+package labo8_calculatrice.util;
 
 import java.util.EmptyStackException;
 

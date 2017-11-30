@@ -14,5 +14,24 @@ import labo8_calculatrice.model.State;
 public class Division extends Operator{
     public Division (State state){
         super(state);
+    }   
+    
+    public void execute(){
+        
+        state.empile();
+        
+        if(state.stackSize() > 1){
+            double denominateur = state.desempile();
+            double numerateur;
+            if(denominateur == 0){
+                state.flagError();
+                state.setCurrentValue("No division by 0 !");
+                state.empile(denominateur);
+            }
+            else {
+                numerateur = state.desempile();
+                state.setCurrentValue(numerateur / denominateur);
+            }
+        }
     }
 }

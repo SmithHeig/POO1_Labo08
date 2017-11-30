@@ -16,4 +16,7 @@ public class Backspace extends Operator {
         super(state);
     }
     
+    public void execute(){
+        state.bakspace();
+    }
 }
