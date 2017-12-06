@@ -18,20 +18,22 @@ public class Division extends Operator{
     
     public void execute(){
         
-        state.empile();
         
-        if(state.stackSize() > 1){
+        if(state.stackSize() > 0){
+            state.empile();
+        
             double denominateur = state.desempile();
             double numerateur;
             if(denominateur == 0){
-                state.flagError();
-                state.setCurrentValue("No division by 0 !");
+                state.flagError("No division by 0 !");
                 state.empile(denominateur);
             }
             else {
                 numerateur = state.desempile();
                 state.setCurrentValue(numerateur / denominateur);
             }
+        } else {
+            state.flagError();
         }
     }
 }

@@ -17,7 +17,6 @@ public class Sign extends Operator{
     }    
     
     public void execute(){
-        
         state.negateCurrentValue();
     }
 }

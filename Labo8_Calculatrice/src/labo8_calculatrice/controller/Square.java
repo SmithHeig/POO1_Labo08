@@ -18,12 +18,11 @@ public class Square extends Operator{
     
     public void execute(){
         
-        state.empile();
         
-        if(state.stackSize() > 0){
-            double A = state.desempile();
-            
-            state.setCurrentValue(A * A);
-        }
+        state.empile();
+
+        double A = state.desempile();
+
+        state.setCurrentValue(A * A);
     }
 }

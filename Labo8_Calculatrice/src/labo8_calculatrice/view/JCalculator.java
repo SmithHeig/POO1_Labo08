@@ -4,22 +4,7 @@ import labo8_calculatrice.controller.Operator;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import labo8_calculatrice.controller.Backspace;
-import labo8_calculatrice.controller.Clear;
-import labo8_calculatrice.controller.ClearError;
-import labo8_calculatrice.controller.Digit;
-import labo8_calculatrice.controller.Division;
-import labo8_calculatrice.controller.Dot;
-import labo8_calculatrice.controller.Enter;
-import labo8_calculatrice.controller.Inversed;
-import labo8_calculatrice.controller.MemoryRecall;
-import labo8_calculatrice.controller.MemoryStore;
-import labo8_calculatrice.controller.Minus;
-import labo8_calculatrice.controller.Multiply;
-import labo8_calculatrice.controller.Plus;
-import labo8_calculatrice.controller.Sign;
-import labo8_calculatrice.controller.Square;
-import labo8_calculatrice.controller.SquareRoot;
+import labo8_calculatrice.controller.*;
 
 import labo8_calculatrice.model.State;
 

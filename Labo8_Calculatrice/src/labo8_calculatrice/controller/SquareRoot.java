@@ -20,16 +20,13 @@ public class SquareRoot extends Operator{
         
         state.empile();
         
-        if(state.stackSize() > 0){
-            double A = state.desempile();
-            
-            if(A < 0){
-                state.flagError();
-                state.setCurrentValue("No sqrt of negative values !");
-                state.empile(A);
-            } else {
-                state.setCurrentValue(Math.sqrt(A));
-            }
+        double A = state.desempile();
+
+        if(A < 0){
+            state.flagError("No sqrt of negative values !");
+            state.empile(A);
+        } else {
+            state.setCurrentValue(Math.sqrt(A));
         }
     }
 }

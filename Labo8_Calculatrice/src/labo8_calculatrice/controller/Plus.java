@@ -18,13 +18,15 @@ public class Plus extends Operator{
     
     public void execute(){
         
-        state.empile();
-         
-        if(state.stackSize() > 1){
+        if(state.stackSize() > 0){
+            state.empile();
+
             double B = state.desempile();
             double A = state.desempile();
             
             state.setCurrentValue(A + B);
+        } else {
+            state.flagError();
         }
     }
 }

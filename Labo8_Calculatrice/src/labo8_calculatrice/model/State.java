@@ -33,48 +33,58 @@ public class State {
     }
     
     public void bakspace(){
-        if(currentValue.length() > 0){
-            currentValue = currentValue.substring(0, currentValue.length() - 1);
+        if(!error){
+            if(currentValue.length() > 0){
+                currentValue = currentValue.substring(0, currentValue.length() - 1);
+            }
         }
     }
     
     public void empile(){
-        
-        valeurs.stack(Double.parseDouble(currentValue));
-        clean();
+        if(!error){
+            valeurs.stack(Double.parseDouble(currentValue));
+            clean();
+        }
     }
 
     public void empile(double d){
-        valeurs.stack(d);
+        if(!error){
+            valeurs.stack(d);
+        }
     }
     
     public void setCurrentValue(double d){
-        setCurrentValue(String.valueOf(d));
+        if(!error){
+            setCurrentValue(String.valueOf(d));
+        }
     }
     
     public void setCurrentValue(String s){
-        currentValue = s;
+        if(!error){
+            currentValue = s;
+        }
     }
     
     public void addDigit(char digit){
-        
-        if(currentValue.compareTo("0") == 0){
-            if(digit != '0'){
-                currentValue = "" + digit;
+        if(!error){
+            if(currentValue.compareTo("0") == 0){
+                if(digit != '0'){
+                    currentValue = "" + digit;
+                }
+            } else {
+                currentValue += digit;
             }
-        } else {
-            currentValue += digit;
         }
     }
     
     public void addDot(){
-        if(!currentValue.contains(".")){
+        if(!error && !currentValue.contains(".")){
             currentValue += ".";
         }
     }
     
     public void negateCurrentValue(){
-        if(currentValue.compareTo("0") != 0){
+        if(!error && currentValue.compareTo("0") != 0){
             if(currentValue.startsWith("-")){
                 currentValue = currentValue.substring(1);
             } else {
@@ -84,12 +94,14 @@ public class State {
     }
     
     public void memorySave(){
-        memoryValue = currentValue;
-        clean();
+        if(!error){
+            memoryValue = currentValue;
+            clean();
+        }
     }
     
     public void memoryLoad(){
-        if(memoryValue.compareTo("") != 0){
+        if(!error && memoryValue.compareTo("") != 0){
             currentValue = memoryValue;
         }
     }
@@ -104,6 +116,11 @@ public class State {
     
     public void flagError(){
         error = true;
+        currentValue = "Error";
+    }
+    public void flagError(String s){
+        error = true;
+        currentValue = s;
     }
     
     public String getCurrentValue(){
