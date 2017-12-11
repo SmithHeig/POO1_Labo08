@@ -5,7 +5,7 @@
  */
 package labo8_calculatrice.model;
 
-import labo8_calculatrice.util.*;
+import labo8_calculatrice.util.Pile;
 
 /**
  *
