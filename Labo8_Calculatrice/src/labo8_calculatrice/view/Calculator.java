@@ -61,41 +61,80 @@ public class Calculator {
     }
     
     private void run(){
+        
         boolean exit = false;
+        
         Operator enter = new Enter(state);
         System.out.println("java Calculator");
+        
+        Scanner sc = new Scanner(System.in);    // le lecteur de ligne de commande
+        String s;                               // la ligne de "commande" entrée par l'utilisateur
+        Operator op;                            // l'opérateur qui sera associé à la ligne de commande
+        
+        // boucle d'exécution de la calculatrice en console
         while (!exit){
-            Scanner sc = new Scanner(System.in);
-            String s = sc.nextLine();
-            Operator op = findOperator(s,operators);
+            
+            // lecture de la commande entrée par l'utilisateur
+            s = sc.nextLine();
+            
+            if(s.compareTo("exit") == 0){
+                break;
+            }
+            // association a l'opérateur correspondant
+            op = findOperator(s,operators);
+            
+            // si on a trouvé un opérateur du premier coup on va l'exécuter simplement
             if(op != null){
-                System.out.println("On a un opérateur ! op: " + s);
                 op.execute();
-            } else{
+            } 
+            // sinon c'est soit un nombre soit nimporte quoi !
+            else {
+                boolean hasError = false;
+                
+                //premier parcours pour checker si on a un nombre cohérent
                 for(int i = 0; i < s.length(); ++i){
                     op = findOperator(Character.toString(s.charAt(i)),digits);
-                    if(op != null){
-                        System.out.println("Ajout d'un chiffre ! chiffre: " + s.charAt(i));
-                        op.execute();
-                    } else {
-                        System.out.println("Ce n'est pas un chiffre ceci Monsieur Frodon!");
+                    if(op == null){
+                        hasError = true;
+                        break;
                     }
                 }
-                if(op != null){
-                    enter.execute();
+                
+                // check si il n'y avait pas d'erreurs dans le nombre
+                if(!hasError){
+                    // parcours d'exécution
+                    for(int i = 0; i < s.length(); ++i){
+                        findOperator(Character.toString(s.charAt(i)),digits).execute();
+                    }
+                    
+                    // on le flag comme étant un résultat pour qu'il soit push si on entre un nouveau digit
+                    state.flagAsResult();
+                } else {
+                    System.out.println("Ceci n'est ni un nombre ni un opérateur Monsieur Frodon " + s + " !");
                 }
             }
+            
+            //affichage de la pile
             Object[] values = state.getValues();
             System.out.println("size de la pile " + state.stackSize());
             for(int i = 0; i < values.length;++i){
                 double d = (double)values[i];
-                System.out.print(d + " ");
+                System.out.print("<" + d + "> ");
             }
             System.out.print("\n");
+            
+            // affichage de la current value
             System.out.println("Current value: " + state.getCurrentValue());
+            
         }
     }
     
+    /**
+     * Cherche l'opérateur dans la liste de paire
+     * @param name      le nom de l'opérateur sous forme de string
+     * @param l         la liste des paire (string, operator) dans laquelle 
+     * @return 
+     */
     private Operator findOperator(String name, LinkedList l){
         Iterator it = l.iterator();
         while(it.hasNext()){

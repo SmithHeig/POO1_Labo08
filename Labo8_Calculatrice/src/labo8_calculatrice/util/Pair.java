@@ -21,6 +21,7 @@ public class Pair {
     }
     
     public String meaning(){return meaning;}
+    
     public Operator operator(){return operator;}
     
     public boolean compareTo(String s){

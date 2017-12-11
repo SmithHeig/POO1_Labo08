@@ -15,8 +15,17 @@ public class State {
     private Pile valeurs = new Pile();
     private String currentValue = "0";
     private boolean error = false;
-    
     private String memoryValue = "";
+    
+    private boolean isAResult = false;
+    
+    public void flagAsResult(){
+        isAResult = true;
+    }
+    
+    public void flasAsDigit() {
+        isAResult = false;
+    }
     
     public void CE(){
         error = false;
@@ -55,6 +64,7 @@ public class State {
     
     public void setCurrentValue(double d){
         if(!error){
+            flagAsResult();
             setCurrentValue(String.valueOf(d));
         }
     }
@@ -66,6 +76,13 @@ public class State {
     }
     
     public void addDigit(char digit){
+        // si le currentValue n'est pas un nombre entré à la main mais le 
+        // résultat d'un calcul on veut qu'il aille sur la pile et que on
+        // recommence à entrer un nouveau nombre !
+        if(isAResult){
+            flasAsDigit();
+            empile();
+        }
         if(!error){
             if(currentValue.compareTo("0") == 0){
                 if(digit != '0'){
