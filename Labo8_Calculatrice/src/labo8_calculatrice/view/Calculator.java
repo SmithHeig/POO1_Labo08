@@ -81,7 +81,9 @@ public class Calculator {
                         System.out.println("Ce n'est pas un chiffre ceci Monsieur Frodon!");
                     }
                 }
-                enter.execute();
+                if(op != null){
+                    enter.execute();
+                }
             }
             Object[] values = state.getValues();
             System.out.println("size de la pile " + state.stackSize());
@@ -90,6 +92,7 @@ public class Calculator {
                 System.out.print(d + " ");
             }
             System.out.print("\n");
+            System.out.println("Current value: " + state.getCurrentValue());
         }
     }
     
