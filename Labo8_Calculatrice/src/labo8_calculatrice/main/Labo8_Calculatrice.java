@@ -18,7 +18,9 @@ public class Labo8_Calculatrice {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JCalculator jcalculator = new JCalculator();
+        
+        new JCalculator().setVisible(true);
+        
         Calculator calculator = new Calculator();
     }
     
