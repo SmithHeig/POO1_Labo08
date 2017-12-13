@@ -26,6 +26,7 @@ public class Plus extends Operator{
             
             state.setCurrentValue(A + B);
         } else {
+            state.empile();
             state.flagError();
         }
     }
