@@ -54,11 +54,6 @@ public class Calculator {
             digits.add(new Pair(s,new Digit(state,i)));
         }
         digits.add(new Pair(".",new Dot(state)));
-        
-        Iterator it = digits.iterator();
-        while(it.hasNext()){
-            Pair p = (Pair)it.next();
-        }
     
         run();
     }
@@ -129,7 +124,7 @@ public class Calculator {
                 }
                 
                 // check si il n'y avait pas d'erreurs dans le nombre
-                if(!hasError){
+                if(Double.parseDouble(s) != Double.NaN){
                     // parcours d'exécution
                     for(int i = 0; i < s.length(); ++i){
                         findOperator(Character.toString(s.charAt(i)),digits).execute();
