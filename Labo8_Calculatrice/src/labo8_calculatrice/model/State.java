@@ -43,7 +43,12 @@ public class State {
     
     public void bakspace(){
         if(!error){
-            if(currentValue.length() > 0){
+            if((currentValue.length() == 2 && currentValue.startsWith("-")) 
+                || currentValue.length() == 1 ){
+                
+                clean();
+                
+            } else if(currentValue.length() > 1){
                 currentValue = currentValue.substring(0, currentValue.length() - 1);
             }
         }
@@ -83,6 +88,7 @@ public class State {
             flasAsDigit();
             empile();
         }
+        
         if(!error){
             if(currentValue.compareTo("0") == 0){
                 if(digit != '0'){
@@ -114,10 +120,12 @@ public class State {
         if(!error){
             memoryValue = currentValue;
             clean();
+            flasAsDigit();
         }
     }
     
     public void memoryLoad(){
+        flagAsResult();
         if(!error && memoryValue.compareTo("") != 0){
             currentValue = memoryValue;
         }

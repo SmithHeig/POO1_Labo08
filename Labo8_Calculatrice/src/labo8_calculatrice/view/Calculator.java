@@ -92,18 +92,32 @@ public class Calculator {
             } 
             // sinon c'est soit un nombre soit nimporte quoi !
             else {
-                /* NEW */
+                /* NEW VERSION */
                 // check si c'est un nombre
                 try {
-                    double nbr = Double.parseDouble(s);
                     
-                    state.empile(nbr);
+                    double nbr = Double.parseDouble(s);
+                    // ici une exception sera levée si c'est pas un nombre donc le code suivant ne sera jamais exécuté si c'est pas un nombre correct.
+                    // ça permet de gérer tout les problèmes liés au -, au points multiples etc... On ne va pas réinventer la roue pour le plaisir
+                    
+                    // parcours d'exécution
+                    for(int i = 0; i < s.length(); ++i){
+                        findOperator(Character.toString(s.charAt(i)), digits).execute();
+                    }
+                    
+                    // on le flag comme étant un résultat pour qu'il soit push si on entre un nouveau digit
+                    // évite d'utiliser l'opérateur enter ici parceque il serait répété si on fait un + par exemple (qui commence par appeler enter)
+                    
+                    state.flagAsResult();
+                    
                 } catch (Exception e){
                     
-                    System.out.println("Ceci n'est ni un nombre ni un opérateur Monsieur Frodon " + s + " !");
+                    // Ignorer le chiffre de merde et faire comme si de rien n'était
+                    //System.out.println("Ceci n'est ni un nombre ni un opérateur Monsieur Frodon " + s + " !");
                 }
+                /* END NEW */
                 
-                /* OLD
+                /* OLD VERSION
                 boolean hasError = false;
                 //premier parcours pour checker si on a un nombre cohérent
                 for(int i = 0; i < s.length(); ++i){
@@ -123,14 +137,12 @@ public class Calculator {
                     
                     // on le flag comme étant un résultat pour qu'il soit push si on entre un nouveau digit
                     // évite d'utiliser l'opérateur enter ici
-                    enter.execute();
+                    state.flagAsResult();
                     
                 } else {
                     System.out.println("Ceci n'est ni un nombre ni un opérateur Monsieur Frodon " + s + " !");
                 }
-                */
-                
-                
+                */  // END OLD
             }
             
             //affichage de la pile
@@ -138,17 +150,19 @@ public class Calculator {
             //System.out.println("size de la pile " + state.stackSize());
             
             
-            // ssi il y a une current value
+            //Affichage
+            System.out.print(state.getCurrentValue() + " [ ");
             if(state.stackSize() > 0) {
+                
                 // on affiche la pile
                 for(int i = 0; i < values.length;++i){
                     double d = (double)values[i];
-                    System.out.print("<" + d + "> ");
+                    System.out.print(+ d + " ");
                 }
             } else {
-                System.out.println("<Empty Stack>");
+                // rien a afficher pile vide
             }
-            System.out.print("\n");
+            System.out.println("]");
             
             // affichage de la current value
             //System.out.println("Current value: " + state.getCurrentValue());
