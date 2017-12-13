@@ -35,7 +35,7 @@ public class Calculator {
         operators.add(new Pair("ce", new ClearError(state)));
         operators.add(new Pair("/", new Division(state)));
         //operators.add(new Pair(".", new Dot(state));
-        //operators.add(new Pair("enter", new Enter(state));
+        
         operators.add(new Pair("inv", new Inversed(state)));
         operators.add(new Pair("mr", new MemoryRecall(state)));
         operators.add(new Pair("ms", new MemoryStore(state)));
@@ -45,6 +45,9 @@ public class Calculator {
         //operators.add(new Pair("-", new Sign(state)));
         operators.add(new Pair("^", new Square(state)));
         operators.add(new Pair("sqrt", new SquareRoot(state)));
+        
+        // l'opérateur enter est utilisé uniquement depuis le code pas en tant que commande
+        Enter enter = new Enter(state);
         
         for(int i = 0; i < 10; ++i){
             String s = String.format("%d",i);
@@ -65,7 +68,7 @@ public class Calculator {
         boolean exit = false;
         
         Operator enter = new Enter(state);
-        System.out.println("java Calculator");
+        System.out.println("launching Java Calculator - console mode");
         
         Scanner sc = new Scanner(System.in);    // le lecteur de ligne de commande
         String s;                               // la ligne de "commande" entrée par l'utilisateur
@@ -89,8 +92,19 @@ public class Calculator {
             } 
             // sinon c'est soit un nombre soit nimporte quoi !
             else {
-                boolean hasError = false;
+                /* NEW */
+                // check si c'est un nombre
+                try {
+                    double nbr = Double.parseDouble(s);
+                    
+                    state.empile(nbr);
+                } catch (Exception e){
+                    
+                    System.out.println("Ceci n'est ni un nombre ni un opérateur Monsieur Frodon " + s + " !");
+                }
                 
+                /* OLD
+                boolean hasError = false;
                 //premier parcours pour checker si on a un nombre cohérent
                 for(int i = 0; i < s.length(); ++i){
                     op = findOperator(Character.toString(s.charAt(i)),digits);
@@ -108,23 +122,36 @@ public class Calculator {
                     }
                     
                     // on le flag comme étant un résultat pour qu'il soit push si on entre un nouveau digit
-                    state.flagAsResult();
+                    // évite d'utiliser l'opérateur enter ici
+                    enter.execute();
+                    
                 } else {
                     System.out.println("Ceci n'est ni un nombre ni un opérateur Monsieur Frodon " + s + " !");
                 }
+                */
+                
+                
             }
             
             //affichage de la pile
             Object[] values = state.getValues();
-            System.out.println("size de la pile " + state.stackSize());
-            for(int i = 0; i < values.length;++i){
-                double d = (double)values[i];
-                System.out.print("<" + d + "> ");
+            //System.out.println("size de la pile " + state.stackSize());
+            
+            
+            // ssi il y a une current value
+            if(state.stackSize() > 0) {
+                // on affiche la pile
+                for(int i = 0; i < values.length;++i){
+                    double d = (double)values[i];
+                    System.out.print("<" + d + "> ");
+                }
+            } else {
+                System.out.println("<Empty Stack>");
             }
             System.out.print("\n");
             
             // affichage de la current value
-            System.out.println("Current value: " + state.getCurrentValue());
+            //System.out.println("Current value: " + state.getCurrentValue());
             
         }
     }

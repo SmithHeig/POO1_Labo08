@@ -6,6 +6,7 @@
 package labo8_calculatrice.main;
 
 import labo8_calculatrice.view.Calculator;
+import labo8_calculatrice.view.JCalculator;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Labo8_Calculatrice {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        JCalculator jcalculator = new JCalculator();
         Calculator calculator = new Calculator();
     }
     
