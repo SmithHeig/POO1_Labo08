@@ -63,7 +63,14 @@ public class Calculator {
         boolean exit = false;
         
         Operator enter = new Enter(state);
-        System.out.println("launching Java Calculator - console mode");
+        System.out.println("|******************************************|");
+        System.out.println("|      Java Calculator - console mode      |");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|        COMMANDS:                         |");
+        System.out.println("|        gui  - launches GUI mode          |");
+        System.out.println("|        exit - exits the programm         |");
+        System.out.println("|******************************************|");
+        
         
         Scanner sc = new Scanner(System.in);    // le lecteur de ligne de commande
         String s;                               // la ligne de "commande" entrée par l'utilisateur
@@ -73,9 +80,13 @@ public class Calculator {
         while (!exit){
             
             // lecture de la commande entrée par l'utilisateur
+            System.out.printf("> ");
             s = sc.nextLine();
             
-            if(s.compareTo("exit") == 0){
+            if(s.equals("exit")){
+                break;
+            } else if (s.equals("gui")){
+                new JCalculator().setVisible(true);
                 break;
             }
             // association a l'opérateur correspondant
@@ -90,7 +101,10 @@ public class Calculator {
                 /* NEW VERSION */
                 // check si c'est un nombre
                 try {
-                    
+                    // petit ajout pour éviter qu'il considère ".6" comme "6" mais bien comme "0.6"
+                    if(s.startsWith(".")){
+                        s = "0"+s;
+                    }
                     double nbr = Double.parseDouble(s);
                     // ici une exception sera levée si c'est pas un nombre donc le code suivant ne sera jamais exécuté si c'est pas un nombre correct.
                     // ça permet de gérer tout les problèmes liés au -, au points multiples etc... On ne va pas réinventer la roue pour le plaisir
@@ -106,38 +120,8 @@ public class Calculator {
                     state.flagAsResult();
                     
                 } catch (Exception e){
-                    
-                    // Ignorer le chiffre de merde et faire comme si de rien n'était
-                    //System.out.println("Ceci n'est ni un nombre ni un opérateur Monsieur Frodon " + s + " !");
+                    // Ignorer
                 }
-                /* END NEW */
-                
-                /* OLD VERSION
-                boolean hasError = false;
-                //premier parcours pour checker si on a un nombre cohérent
-                for(int i = 0; i < s.length(); ++i){
-                    op = findOperator(Character.toString(s.charAt(i)),digits);
-                    if(op == null){
-                        hasError = true;
-                        break;
-                    }
-                }
-                
-                // check si il n'y avait pas d'erreurs dans le nombre
-                if(Double.parseDouble(s) != Double.NaN){
-                    // parcours d'exécution
-                    for(int i = 0; i < s.length(); ++i){
-                        findOperator(Character.toString(s.charAt(i)),digits).execute();
-                    }
-                    
-                    // on le flag comme étant un résultat pour qu'il soit push si on entre un nouveau digit
-                    // évite d'utiliser l'opérateur enter ici
-                    state.flagAsResult();
-                    
-                } else {
-                    System.out.println("Ceci n'est ni un nombre ni un opérateur Monsieur Frodon " + s + " !");
-                }
-                */  // END OLD
             }
             
             //affichage de la pile

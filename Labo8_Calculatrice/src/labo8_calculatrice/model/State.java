@@ -39,6 +39,7 @@ public class State {
     
     public void clean(){
         currentValue = "0";
+        flagAsDigit();
     }
     
     public void bakspace(){

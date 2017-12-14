@@ -19,7 +19,7 @@ public class Labo8_Calculatrice {
      */
     public static void main(String[] args) {
         
-        new JCalculator().setVisible(true);
+        //new JCalculator().setVisible(true);
         
         Calculator calculator = new Calculator();
     }
