@@ -23,7 +23,7 @@ public class State {
         isAResult = true;
     }
     
-    public void flasAsDigit() {
+    public void flagAsDigit() {
         isAResult = false;
     }
     
@@ -45,9 +45,7 @@ public class State {
         if(!error){
             if((currentValue.length() == 2 && currentValue.startsWith("-")) 
                 || currentValue.length() == 1 ){
-                
                 clean();
-                
             } else if(currentValue.length() > 1){
                 currentValue = currentValue.substring(0, currentValue.length() - 1);
             }
@@ -85,7 +83,7 @@ public class State {
         // résultat d'un calcul on veut qu'il aille sur la pile et que on
         // recommence à entrer un nouveau nombre !
         if(isAResult){
-            flasAsDigit();
+            flagAsDigit();
             empile();
         }
         
@@ -120,7 +118,7 @@ public class State {
         if(!error){
             memoryValue = currentValue;
             clean();
-            flasAsDigit();
+            flagAsDigit();
         }
     }
     
