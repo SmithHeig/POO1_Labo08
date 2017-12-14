@@ -88,3 +88,20 @@
 | inv \<enter\>        | 0.05               | \<\>                              |                               | Oui    |
 | exit \<enter\>       |                    |                                   | Quitte le programme           | Non    |
 
+## UML
+
+![UML](img\UML_Labo8_Smith_Allemand.PNG)
+
+## Explication/Remarque
+
+N'ayant pas vu le concepte de MVC, il nous a été difficile d'adapter correctement ce modèle. En fin de laboratoire, après discussion et reflexion avec nos collègue, nous pensons avoir fait une erreur de conception. Nous avons pensez que toutes les opérations accédant à la pile doit ce faire dans le *state*. Par concequence, les opérateurs ne font que appeler des fonctions dans la *state* qui réalise des opérations. 
+
+Si nous devions refaire ce laboratoire, nous ferions ces opérations dans les *opérateurs* et créer des fonctions qui permettent de faire des modifications de la pile sécurisées dans notre *state*.
+
+Ayant vu les classes interne que en fin de laboratoire et suite à la demande de Pier de ne pas le faire, nous avons pas implémenter les opérateurs en tant que classe interne à *Operator*.
+
+## Conclusion
+
+La difficulté fut de réalisé du code compatible avec la GUI et la console. Etant donner que en console, l'insertion de chiffre et l'utilisation de la touche *Enter* est différent conceptuellement.
+
+L'utilisation d'un modèle comme un MVC est nouveau pour nous et ne sommes pas sur d'avoir complétement compris le concept.
