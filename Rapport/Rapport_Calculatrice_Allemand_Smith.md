@@ -57,36 +57,38 @@
 
 ##Test Console 
 
-| Test                 | currentValue       | Stack                             | Remarque                      | Réussi |
-| -------------------- | ------------------ | --------------------------------- | ----------------------------- | ------ |
-| 1 \<enter\>          | 1                  | \<\>                              |                               | Oui    |
-| 2 \<enter\>          | 2                  | \<1.0\>                           |                               | Oui    |
-| 3 \<enter\>          | 3                  | \<2.0\> \<1.0\>                   |                               | Oui    |
-| + \<enter\>          | 5.0                | \<1.0\>                           |                               | Oui    |
-| - \<enter\>          | -4.0               | \<\>                              |                               | Oui    |
-| + \<enter\>          | Error              | \<-4.0\>                          | Error / on restack pas le - 4 | Non    |
-| ce\<enter\>          | 0                  | \<-4.0\>                          |                               | Oui    |
-| 123.4 \<enter\>      | 123.4              | \<-4.0\>                          |                               | Oui    |
-| 123hello.4 \<enter\> | 123.4              | \<-4.0\>                          | Ne fait rien                  | Oui    |
-| . \<enter\>          | 123.4              | \<-4.0\>                          | Ne fait rien                  | Oui    |
-| .6 \<enter\>         | 0.6                | \<123.4\> \<-4.0\>                | A discuter/debug              | Non    |
-| ms \<enter\>         | 0                  | \<123.4\> \<-4.0\>                | saved: 0.6                    | Oui    |
-| 5 \<enter\>          | 5                  | \<123.4\> \<-4.0\>                | saved: 0.6                    | Oui    |
-| mr \<enter\>         | 0.6                | \<123.4\> \<-4.0\>                | saved: 0.6                    | Oui    |
-| + \<enter\>          | 124.0              | \<-4.0\>                          |                               | Oui    |
-| mr \<enter\>         | 0.6                | \<-4.0\>                          |                               | Oui    |
-| 0 \<enter\>          | 0                  | \<0.6\> \<-4.0\>                  |                               | Oui    |
-| / \<enter\>          | No division by 0 ! | \<0.6\> \<-4.0\>                  | Erreur                        | Oui    |
-| 6 \<enter\>          | No division by 0 ! | \<12.0\> \<0.0\> \<0.6\> \<-4.0\> | Ne fait rien                  | Oui    |
-| ce \<enter\>         | 0                  | \<12.0\> \<0.0\> \<0.6\> \<-4.0\> | ClearError                    | Oui    |
-| c \<enter\>          | 0                  | \<\>                              | Clear                         | Oui    |
-| 4 \<enter\>          | 4                  | \<\>                              |                               | Oui    |
-| 5 \<enter\>          | 5                  | \<4.0\>                           |                               | Oui    |
-| * \<enter\>          | 20                 | \<\>                              |                               | Oui    |
-| ^ \<enter\>          | 400                | \<\>                              |                               | Oui    |
-| sqrt \<enter\>       | 20                 | \<\>                              |                               | Oui    |
-| inv \<enter\>        | 0.05               | \<\>                              |                               | Oui    |
-| exit \<enter\>       |                    |                                   | Quitte le programme           | Non    |
+| Test                 | currentValue              | Stack                             | Remarque            | Réussi |
+| -------------------- | ------------------------- | --------------------------------- | ------------------- | ------ |
+| 1 \<enter\>          | 1                         | \<\>                              |                     | Oui    |
+| 2 \<enter\>          | 2                         | \<1.0\>                           |                     | Oui    |
+| 3 \<enter\>          | 3                         | \<2.0\> \<1.0\>                   |                     | Oui    |
+| + \<enter\>          | 5.0                       | \<1.0\>                           |                     | Oui    |
+| - \<enter\>          | -4.0                      | \<\>                              |                     | Oui    |
+| + \<enter\>          | Error                     | \<-4.0\>                          | Error               | Oui    |
+| ce\<enter\>          | 0                         | \<-4.0\>                          |                     | Oui    |
+| 123.4 \<enter\>      | 123.4                     | \<-4.0\>                          |                     | Oui    |
+| 123hello.4 \<enter\> | 123.4                     | \<-4.0\>                          | Erreur              | Oui    |
+| . \<enter\>          | 123.4                     | \<-4.0\>                          | Erreur              | Oui    |
+| .6 \<enter\>         | 0.6                       | \<123.4\> \<-4.0\>                |                     | Oui    |
+| ms \<enter\>         | 0                         | \<123.4\> \<-4.0\>                | saved: 0.6          | Oui    |
+| 5 \<enter\>          | 5                         | \<123.4\> \<-4.0\>                | saved: 0.6          | Oui    |
+| mr \<enter\>         | 0.6                       | \<123.4\> \<-4.0\>                | saved: 0.6          | Oui    |
+| + \<enter\>          | 124.0                     | \<-4.0\>                          | saved: 0.6          | Oui    |
+| mr \<enter\>         | 0.6                       | \<-4.0\>                          | saved: 0.6          | Oui    |
+| 0 \<enter\>          | 0                         | \<0.6\> \<-4.0\>                  |                     | Oui    |
+| / \<enter\>          | No division by 0 !        | \<0.6\> \<-4.0\>                  | Erreur              | Oui    |
+| 6 \<enter\>          | No division by 0 !        | \<12.0\> \<0.0\> \<0.6\> \<-4.0\> | Ne fait rien        | Oui    |
+| ce \<enter\>         | 0                         | \<12.0\> \<0.0\> \<0.6\> \<-4.0\> | ClearError          | Oui    |
+| c \<enter\>          | 0                         | \<\>                              | Clear               | Oui    |
+| 4 \<enter\>          | 4                         | \<\>                              |                     | Oui    |
+| 5 \<enter\>          | 5                         | \<4.0\>                           |                     | Oui    |
+| * \<enter\>          | 20                        | \<\>                              |                     | Oui    |
+| ^ \<enter\>          | 400                       | \<\>                              |                     | Oui    |
+| sqrt \<enter\>       | 20                        | \<\>                              |                     | Oui    |
+| inv \<enter\>        | 0.05                      | \<\>                              |                     | Oui    |
+| -5                   | -5                        | \<0.05\>                          |                     | Oui    |
+| sqrt                 | No srt of negative values | \< 0.05>                          | Erreur              | Oui    |
+| exit \<enter\>       | No srt of negative values |                                   | Quitte le programme | Oui    |
 
 ## UML
 
@@ -99,6 +101,8 @@ N'ayant pas vu le concepte de MVC, il nous a été difficile d'adapter correctem
 Si nous devions refaire ce laboratoire, nous ferions ces opérations dans les *opérateurs* et créer des fonctions qui permettent de faire des modifications de la pile sécurisées dans notre *state*.
 
 Ayant vu les classes interne que en fin de laboratoire et suite à la demande de Pier de ne pas le faire, nous avons pas implémenter les opérateurs en tant que classe interne à *Operator*.
+
+Nous avons décédé de lancer par défaut la calculatrice en mode console et pour lancer le monde graphique il suffit de tapper *gui* dans la console.
 
 ## Conclusion
 

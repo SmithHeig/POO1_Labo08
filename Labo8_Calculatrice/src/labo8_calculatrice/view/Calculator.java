@@ -85,6 +85,7 @@ public class Calculator {
             for(String sub : subtable) {
             
                 if(sub.equals("exit")){
+                    exit = true;
                     break;
                 } else if (sub.equals("gui")){
                     new JCalculator().setVisible(true);
