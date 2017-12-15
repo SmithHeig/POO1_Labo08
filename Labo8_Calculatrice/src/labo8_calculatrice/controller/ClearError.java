@@ -20,6 +20,6 @@ public class ClearError extends Operator{
         state.CE();
     }
     public String help() {
-        return "Supprime l'erreur et remet Pile[0] comme current value";
+        return "Supprime l'erreur et remet le premier nombre de la pile comme current value";
     }
 }

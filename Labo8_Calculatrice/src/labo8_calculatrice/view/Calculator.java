@@ -59,26 +59,12 @@ public class Calculator {
         run();
     }
     
+    
     private void run(){
         
+        header();
+        
         boolean exit = false;
-        
-        Operator enter = new Enter(state);
-        System.out.println("|-------------------------------------------|");
-        System.out.println("|   (        (          (         )         |\n" +
-                           "|   )\\     ) )\\      (  )\\   ) ( /(    (    |\n" +
-                           "| (((_) ( /(((_)(   ))\\((_| /( )\\())(  )(   |\n" +
-                           "| )\\___ )(_))_  )\\ /((_)_ )(_)|_))/ )\\(()\\  |\n" +
-                           "|((/ __((_)_| |((_|_))(| ((_)_| |_ ((_)((_) |\n" +
-                           "| | (__/ _` | / _|| || | / _` |  _/ _ \\ '_| |\n" +
-                           "|  \\___\\__,_|_\\__| \\_,_|_\\__,_|\\__\\___/_|   |");
-        System.out.println("|-------------------------------------------|");
-        System.out.println("|        COMMANDS:                          |");
-        System.out.println("|        gui  - Launches GUI mode           |");
-        System.out.println("|        exit - Exits the programm          |");
-        System.out.println("|        help - Displays the help           |");
-        System.out.println("|-------------------------------------------|");
-        
         
         Scanner sc = new Scanner(System.in);    // le lecteur de ligne de commande
         String s;                               // la ligne de "commande" entrée par l'utilisateur
@@ -93,70 +79,79 @@ public class Calculator {
             
             s = s.toLowerCase();
             
-            if(s.equals("exit")){
-                break;
-            } else if (s.equals("gui")){
-                new JCalculator().setVisible(true);
-                break;
-            }  else if (s.equals("help")){
-                help();
-                // c'est moches mais ça économise la fin de la boucle inutile
-                continue;
-            }
-            // association a l'opérateur correspondant
-            op = findOperator(s,operators);
             
-            // si on a trouvé un opérateur du premier coup on va l'exécuter simplement
-            if(op != null){
-                op.execute();
-            } 
-            // sinon c'est soit un nombre soit nimporte quoi !
-            else {
-                /* NEW VERSION */
-                // check si c'est un nombre
-                try {
-                    boolean negatif = false;
-                    
-                    // petit ajout pour éviter qu'il considère ".6" comme "6" mais bien comme "0.6"
-                    if(s.startsWith(".") && s.length() != 1){
-                        s = "0"+s;
-                    } else if(s.startsWith("-") && s.length() != 1) {
-                        negatif = true;
-                        s = s.substring(1);
+            String[] subtable = s.split(" ");
+
+            for(String sub : subtable) {
+            
+                if(sub.equals("exit")){
+                    break;
+                } else if (sub.equals("gui")){
+                    new JCalculator().setVisible(true);
+                    break;
+                }  else if (sub.equals("help")){
+                    help();
+                    // c'est moches mais ça économise la fin de la boucle inutile
+                    continue;
+                }
+                // association a l'opérateur correspondant
+                op = findOperator(sub,operators);
+
+                // si on a trouvé un opérateur du premier coup on va l'exécuter simplement
+                if(op != null){
+                    op.execute();
+                } 
+                // sinon c'est soit un nombre soit nimporte quoi !
+                else {
+                    /* NEW VERSION */
+                    // check si c'est un nombre
+                    try {
+                        boolean negatif = false;
+
+                        // petit ajout pour éviter qu'il considère ".6" comme "6" mais bien comme "0.6"
+                        if(sub.startsWith(".") && sub.length() != 1){
+                            sub = "0"+sub;
+                        } else if(sub.startsWith("-") && sub.length() != 1) {
+                            negatif = true;
+                            sub = sub.substring(1);
+                        }
+                        // fait juste un test 
+                        Double.parseDouble(sub);
+                        // ici une exception sera levée si c'est pas un nombre donc le code suivant ne sera jamais exécuté si c'est pas un nombre correct.
+                        // ça permet de gérer tout les problèmes liés au -, au points multiples etc... On ne va pas réinventer la roue pour le plaisir
+
+                        // parcours d'exécution
+                        for(int i = 0; i < sub.length(); ++i){
+                            findOperator(Character.toString(sub.charAt(i)), digits).execute();
+                        }
+
+                        // mis en négatif à la fin parceque on accepte pas de mettre 0 en négatif et que si il est exécuté au début il va essayer de mettre 0 en négatif
+                        if(negatif){
+                            sign.execute();
+                        }
+                        // on le flag comme étant un résultat pour qu'il soit push si on entre un nouveau digit
+                        // évite d'utiliser l'opérateur enter ici parceque il serait répété si on fait un + par exemple (qui commence par appeler enter)
+
+                        state.flagAsResult();
+
+                    } catch (Exception e){
+                        // Ignorer
+                        System.out.println("| Ignore {" + sub + "} n'est pas une commande !");
                     }
-                    // fait juste un test 
-                    Double.parseDouble(s);
-                    // ici une exception sera levée si c'est pas un nombre donc le code suivant ne sera jamais exécuté si c'est pas un nombre correct.
-                    // ça permet de gérer tout les problèmes liés au -, au points multiples etc... On ne va pas réinventer la roue pour le plaisir
-                    
-                    // parcours d'exécution
-                    for(int i = 0; i < s.length(); ++i){
-                        findOperator(Character.toString(s.charAt(i)), digits).execute();
-                    }
-                    
-                    // mis en négatif à la fin parceque on accepte pas de mettre 0 en négatif et que si il est exécuté au début il va essayer de mettre 0 en négatif
-                    if(negatif){
-                        sign.execute();
-                    }
-                    // on le flag comme étant un résultat pour qu'il soit push si on entre un nouveau digit
-                    // évite d'utiliser l'opérateur enter ici parceque il serait répété si on fait un + par exemple (qui commence par appeler enter)
-                    
-                    state.flagAsResult();
-                    
-                } catch (Exception e){
-                    // Ignorer
                 }
             }
             
+
             //affichage de la pile
             Object[] values = state.getValues();
             //System.out.println("size de la pile " + state.stackSize());
-            
-            
+
+
             //Affichage
             System.out.print(state.getCurrentValue() + " [ ");
+
             if(state.stackSize() > 0) {
-                
+
                 // on affiche la pile
                 for(int i = 0; i < values.length;++i){
                     double d = (double)values[i];
@@ -165,11 +160,8 @@ public class Calculator {
             } else {
                 // rien a afficher pile vide
             }
-            System.out.println("]");
-            
-            // affichage de la current value
-            //System.out.println("Current value: " + state.getCurrentValue());
-            
+
+            System.out.print("]\n");
         }
     }
     
@@ -190,10 +182,23 @@ public class Calculator {
         return null;
     }
     
+    private void shorthelp(){
+        System.out.println("|--------------{ COMMANDES }----------------|");
+        System.out.println("| help - Affiche l'aide                     |");
+        System.out.println("| gui  - Lance le mode GUI                  |");
+        System.out.println("| exit - Quitte la calculatrice             |");
+    }
     private void help(){
         
         System.out.println(
             "|-----------------{ HELP }------------------|"
+               
+        );
+        
+        shorthelp();
+        
+        System.out.println(
+            "|--------------{ OPERATEURS }---------------|"
         );
         for(Pair p : operators) {
             System.out.println(
@@ -205,5 +210,22 @@ public class Calculator {
         System.out.println(
             "|---------------{ END HELP }----------------|"
         );
+    }
+    
+    private void header(){
+        
+        System.out.println("|-------------------------------------------|");
+        System.out.println("|   (        (          (         )         |\n" +
+                           "|   )\\     ) )\\      (  )\\   ) ( /(    (    |\n" +
+                           "| (((_) ( /(((_)(   ))\\((_| /( )\\())(  )(   |\n" +
+                           "| )\\___ )(_))_  )\\ /((_)_ )(_)|_))/ )\\(()\\  |\n" +
+                           "|((/ __((_)_| |((_|_))(| ((_)_| |_ ((_)((_) |\n" +
+                           "| | (__/ _` | / _|| || | / _` |  _/ _ \\ '_| |\n" +
+                           "|  \\___\\__,_|_\\__| \\_,_|_\\__,_|\\__\\___/_|   |");
+        System.out.println("|-------------------------------------------|");
+        
+        shorthelp();
+        
+        System.out.println("|-------------------------------------------|");
     }
 }

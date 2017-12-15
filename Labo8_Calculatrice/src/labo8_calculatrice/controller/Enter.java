@@ -22,6 +22,6 @@ public class Enter extends Operator{
     }
     
     public String help() {
-        return "Commit la current value sur la pile";
+        return "Commit la current value sur la pile puis la remplace par 0";
     }
 }
