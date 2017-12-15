@@ -31,4 +31,8 @@ public class Minus extends Operator{
             state.flagError();
         }
     }
+    
+    public String help() {
+        return "Soustrait la current value au premier nombre de la pile";
+    }
 }

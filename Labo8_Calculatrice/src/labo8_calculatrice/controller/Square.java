@@ -25,4 +25,8 @@ public class Square extends Operator{
 
         state.setCurrentValue(A * A);
     }
+    
+    public String help() {
+        return "Eleve la current value au carre";
+    }
 }

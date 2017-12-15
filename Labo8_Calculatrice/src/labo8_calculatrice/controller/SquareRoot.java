@@ -29,4 +29,8 @@ public class SquareRoot extends Operator{
             state.setCurrentValue(Math.sqrt(A));
         }
     }
+    
+    public String help() {
+        return "Extrait la racine carre de la current value";
+    }
 }

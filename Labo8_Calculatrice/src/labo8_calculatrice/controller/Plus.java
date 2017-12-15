@@ -30,4 +30,8 @@ public class Plus extends Operator{
             state.flagError();
         }
     }
+    
+    public String help() {
+        return "Additionne la current value avec le premier nombre de la pile";
+    }
 }

@@ -36,4 +36,8 @@ public class Division extends Operator{
             state.flagError();
         }
     }
+    
+    public String help() {
+        return "Divise le premier nombre de la pile par la current value";
+    }
 }

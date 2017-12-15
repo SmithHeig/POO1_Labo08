@@ -20,7 +20,10 @@ public class Digit extends Operator{
     }   
     
     public void execute() {
-        
         state.addDigit(digit);
+    }
+    
+    public String help() {
+        return "Ajoute un digit à la current value";
     }
 }

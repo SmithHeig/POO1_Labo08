@@ -19,4 +19,7 @@ public class Clear extends Operator{
     public void execute(){
         state.C();
     }
+    public String help() {
+        return "Reset la calculatrice";
+    }
 }

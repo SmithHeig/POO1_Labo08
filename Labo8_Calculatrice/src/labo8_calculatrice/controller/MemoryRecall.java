@@ -12,10 +12,15 @@ import labo8_calculatrice.model.State;
  * @author James
  */
 public class MemoryRecall extends Operator{
+    
     public MemoryRecall(State state){
         super(state);
     }
     public void execute() {
         state.memoryLoad();
+    }
+    
+    public String help() {
+        return "Remplace la current value par le nombre en mémoire";
     }
 }

@@ -25,4 +25,5 @@ public abstract class Operator {
             
     };
     
+    public abstract String help();
 }

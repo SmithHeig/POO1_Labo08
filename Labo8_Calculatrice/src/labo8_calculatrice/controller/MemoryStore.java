@@ -18,4 +18,8 @@ public class MemoryStore extends Operator{
     public void execute() {
         state.memorySave();
     }
+    
+    public String help() {
+        return "Remplace la memoire par la current value";
+    }
 }

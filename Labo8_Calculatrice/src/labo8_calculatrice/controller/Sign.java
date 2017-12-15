@@ -19,4 +19,8 @@ public class Sign extends Operator{
     public void execute(){
         state.negateCurrentValue();
     }
+    
+    public String help() {
+        return "Inverse le signe de la current value";
+    }
 }

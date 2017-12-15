@@ -29,4 +29,8 @@ public class Inversed extends Operator{
             state.setCurrentValue(1 / denominateur);
         }
     }
+    
+    public String help() {
+        return "Calcule l'inverse de current value";
+    }
 }

@@ -19,4 +19,9 @@ public class Backspace extends Operator {
     public void execute(){
         state.bakspace();
     }
+    
+    public String help() {
+        return "Efface le dernier digit de la curent value";
+    }
+    
 }

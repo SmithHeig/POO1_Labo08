@@ -19,4 +19,7 @@ public class ClearError extends Operator{
     public void execute(){
         state.CE();
     }
+    public String help() {
+        return "Supprime l'erreur et remet Pile[0] comme current value";
+    }
 }

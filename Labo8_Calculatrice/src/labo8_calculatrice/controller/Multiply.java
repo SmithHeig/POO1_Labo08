@@ -30,4 +30,8 @@ public class Multiply extends Operator{
             state.flagError();
         }
     }
+    
+    public String help() {
+        return "Multiplie la current value avec le premier nombre de la pile";
+    }
 }

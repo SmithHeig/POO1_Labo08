@@ -20,4 +20,8 @@ public class Enter extends Operator{
     public void execute() {
         state.empile();
     }
+    
+    public String help() {
+        return "Commit la current value sur la pile";
+    }
 }

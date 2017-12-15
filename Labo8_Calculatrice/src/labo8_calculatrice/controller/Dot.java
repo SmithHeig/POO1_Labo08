@@ -20,4 +20,8 @@ public class Dot extends Operator{
     public void execute(){
         state.addDot();
     }
+    
+    public String help() {
+        return "Ajoute un point a la current value";
+    }
 }

@@ -24,7 +24,7 @@ public class Pair {
     
     public Operator operator(){return operator;}
     
-    public boolean compareTo(String s){
+    public boolean equals(String s){
         return s.equals(meaning);
     }
 }

@@ -28,12 +28,13 @@ public class Calculator {
     //private static Digit[] digits = new Digit[10];
      
     //private static List<Pair<String,Operator>> operators = {};
-    
+    private Sign sign;
     
     public Calculator(){
         operators.add(new Pair("c", new Clear(state)));
         operators.add(new Pair("ce", new ClearError(state)));
         operators.add(new Pair("/", new Division(state)));
+        operators.add(new Pair("bs", new Backspace(state)));
         //operators.add(new Pair(".", new Dot(state));
         
         operators.add(new Pair("inv", new Inversed(state)));
@@ -47,7 +48,7 @@ public class Calculator {
         operators.add(new Pair("sqrt", new SquareRoot(state)));
         
         // l'opérateur enter est utilisé uniquement depuis le code pas en tant que commande
-        Enter enter = new Enter(state);
+        sign = new Sign(state);
         
         for(int i = 0; i < 10; ++i){
             String s = String.format("%d",i);
@@ -63,13 +64,20 @@ public class Calculator {
         boolean exit = false;
         
         Operator enter = new Enter(state);
-        System.out.println("|******************************************|");
-        System.out.println("|      Java Calculator - console mode      |");
-        System.out.println("|------------------------------------------|");
-        System.out.println("|        COMMANDS:                         |");
-        System.out.println("|        gui  - launches GUI mode          |");
-        System.out.println("|        exit - exits the programm         |");
-        System.out.println("|******************************************|");
+        System.out.println("|-------------------------------------------|");
+        System.out.println("|   (        (          (         )         |\n" +
+                           "|   )\\     ) )\\      (  )\\   ) ( /(    (    |\n" +
+                           "| (((_) ( /(((_)(   ))\\((_| /( )\\())(  )(   |\n" +
+                           "| )\\___ )(_))_  )\\ /((_)_ )(_)|_))/ )\\(()\\  |\n" +
+                           "|((/ __((_)_| |((_|_))(| ((_)_| |_ ((_)((_) |\n" +
+                           "| | (__/ _` | / _|| || | / _` |  _/ _ \\ '_| |\n" +
+                           "|  \\___\\__,_|_\\__| \\_,_|_\\__,_|\\__\\___/_|   |");
+        System.out.println("|-------------------------------------------|");
+        System.out.println("|        COMMANDS:                          |");
+        System.out.println("|        gui  - Launches GUI mode           |");
+        System.out.println("|        exit - Exits the programm          |");
+        System.out.println("|        help - Displays the help           |");
+        System.out.println("|-------------------------------------------|");
         
         
         Scanner sc = new Scanner(System.in);    // le lecteur de ligne de commande
@@ -83,11 +91,17 @@ public class Calculator {
             System.out.printf("> ");
             s = sc.nextLine();
             
+            s = s.toLowerCase();
+            
             if(s.equals("exit")){
                 break;
             } else if (s.equals("gui")){
                 new JCalculator().setVisible(true);
                 break;
+            }  else if (s.equals("help")){
+                help();
+                // c'est moches mais ça économise la fin de la boucle inutile
+                continue;
             }
             // association a l'opérateur correspondant
             op = findOperator(s,operators);
@@ -101,11 +115,17 @@ public class Calculator {
                 /* NEW VERSION */
                 // check si c'est un nombre
                 try {
+                    boolean negatif = false;
+                    
                     // petit ajout pour éviter qu'il considère ".6" comme "6" mais bien comme "0.6"
-                    if(s.startsWith(".")){
+                    if(s.startsWith(".") && s.length() != 1){
                         s = "0"+s;
+                    } else if(s.startsWith("-") && s.length() != 1) {
+                        negatif = true;
+                        s = s.substring(1);
                     }
-                    double nbr = Double.parseDouble(s);
+                    // fait juste un test 
+                    Double.parseDouble(s);
                     // ici une exception sera levée si c'est pas un nombre donc le code suivant ne sera jamais exécuté si c'est pas un nombre correct.
                     // ça permet de gérer tout les problèmes liés au -, au points multiples etc... On ne va pas réinventer la roue pour le plaisir
                     
@@ -114,6 +134,10 @@ public class Calculator {
                         findOperator(Character.toString(s.charAt(i)), digits).execute();
                     }
                     
+                    // mis en négatif à la fin parceque on accepte pas de mettre 0 en négatif et que si il est exécuté au début il va essayer de mettre 0 en négatif
+                    if(negatif){
+                        sign.execute();
+                    }
                     // on le flag comme étant un résultat pour qu'il soit push si on entre un nouveau digit
                     // évite d'utiliser l'opérateur enter ici parceque il serait répété si on fait un + par exemple (qui commence par appeler enter)
                     
@@ -159,10 +183,27 @@ public class Calculator {
         Iterator it = l.iterator();
         while(it.hasNext()){
             Pair p = (Pair)it.next();
-            if(p.compareTo(name)){
+            if(p.equals(name)){
                 return p.operator();
             }
         }
         return null;
+    }
+    
+    private void help(){
+        
+        System.out.println(
+            "|-----------------{ HELP }------------------|"
+        );
+        for(Pair p : operators) {
+            System.out.println(
+                    "| " + String.format("%1$-5s", p.meaning()) + " - " + p.operator().help()
+            );
+        }
+        
+        
+        System.out.println(
+            "|---------------{ END HELP }----------------|"
+        );
     }
 }
